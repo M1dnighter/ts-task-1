@@ -71,6 +71,31 @@ const obj7: ThirdType = {
 const array = [obj1, obj2, obj3, obj4, obj5, obj6, obj7];
 
 function filter(array: Array<FirstType | SecondType | ThirdType>, type: string) {
+    let result: any[] = [];
+    switch(type){
+        case "FirstType":
+            array.forEach(item =>{
+                if(typeof item.prop1 == 'string' && typeof item.prop2 == 'boolean' && !("prop3" in item)){
+                    result.push(item);
+                }
+            });
+            break;
+        case 'SecondType':
+            array.forEach(item =>{
+                if(typeof item.prop1 == 'undefined' && typeof item.prop2 == 'function'){
+                    result.push(item);
+                }
+            });
+            break;
+        case 'ThirdType':
+            array.forEach(item =>{
+                if(typeof item.prop1 == 'string' && typeof item.prop2 == 'boolean' && "prop3" in item){
+                    result.push(item);
+                }
+            });
+            break;
+    }
+    return result;
 }
 
 filter(array, 'FirstType');
